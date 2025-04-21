@@ -79,7 +79,7 @@ for line in rotated_matrix:
     (1, 7, 3)
     (2, 8, 4)
     """
-# ⇒
+# ⇒ 튜플을 리스트로 변환
 
 rotated_matrix = list(map(list, zip(*matrix[::-1])))
 print(rotated_matrix)   # [[9, 5, 1], [0, 6, 2], [1, 7, 3], [2, 8, 4]]
