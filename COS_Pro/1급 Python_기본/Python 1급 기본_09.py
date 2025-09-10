@@ -27,8 +27,70 @@ return 값 설명
 B의 전략을 알고 있거나 알 수 있는 사람들이 없어 B가 이길 수 있는 경기 횟수의 최댓값을 return 합니다.
 """
 
+# # 1차 시도
+# def solution(N, info, game):
+#     result = 0
+
+#     visited = [False] * N
+#     visited[0] = True
+
+#     for player in info[1]:
+#         visited[player] = True
+
+#     for players in game:
+#         flag = True
+
+#         for player in players:
+#             if visited[player]:
+#                 flag = False
+#                 continue
+
+#             visited[player] = True
+        
+#         if flag:
+#             result += 1
+
+#     return result
+
 def solution(N, info, game):
     result = 0
+
+    def find(x):
+        if p[x] != x:
+            p[x] = find(p[x])
+
+        return p[x]
+    
+    def union(x, y):
+        root_x, root_y = find(x), find(y)
+
+        if root_x == root_y:
+            return
+        
+        if root_x < root_y:
+            p[root_y] = root_x
+        else:
+            p[root_x] = root_y
+        
+
+    p = list(range(N))
+
+    for player in info[1]:
+        p[player] = 0
+
+    for players in game:
+        first = players[0]
+
+        for player in players:
+            union(first, player)
+
+    for players in game:
+        for player in players:
+            if find(player) == 0:
+                break
+        else:
+            result += 1
+
     return result
 
 # 아래는 테스트케이스 출력을 해보기 위한 코드입니다.
