@@ -1,0 +1,55 @@
+"""
+오디션 프로그램에서 지원자를 평가한 평가위원들의 점수 중 
+최고 점수와 최소 점수를 제외한 점수들의 평균을 평가 점수로 사용하려고 합니다. 
+예를 들어, A라는 지원자가 4명의 평가위원들에게 평가를 받아 각 [89, 95, 92, 90]을 획득하였다면 
+이 지원자의 평가 점수는 92, 90의 평균 점수인 91입니다.  
+평가위원들의 점수가 담긴 2차원 배열 scores가 solution 함수의 매개변수로 주어질 때, 
+오디션 프로그램에서 가장 높은 평가 점수를 return 하도록 solution 함수를 작성하려 합니다.  
+코드가 올바르게 동작할 수 있도록 빈칸을 채워주세요. 
+
+매개변수 설명 
+각 지원자별로 평가위원들의 점수가 담긴 2차원 배열 scores가 solution 함수의 매개변수로 주어집니다. 
+- scores의 길이는 지원자 수이며, 2 이상 100 이하인 2차원 배열입니다. 
+- scores의 원소는 평가위원들이 지원자를 평가한 점수 배열이고, 
+    이 배열의 원소는 0 이상 100 이하의 자연수입니다. 
+ 
+return 값 설명 
+지원자 중에서 가장 높은 평가 점수를 return 합니다. 
+단, 평가 점수가 소수인 경우 정수 부분만 return 합니다. 
+"""
+
+def func_a(arr):
+    ret = []
+    for a in arr:
+        a.sort()
+        # ret.append([[quiz]])
+        ret.append(a[1:-1])     # a[1:len(a)-1]
+    return ret
+
+def func_b(arr):
+    ret  = []
+    for a in arr:
+        sum = 0
+        for b in a:
+            sum += b
+        # sum = [[quiz]]
+        sum = sum // len(a) 
+        ret.append(sum)
+    ret.sort(reverse=True)
+    # return ret[[[quiz]]]
+    return ret[0]
+
+
+def solution(scores):
+    # arr = [[quiz]](scores)
+    # answer = [[quiz]](arr)
+    arr = func_a(scores)
+    answer = func_b(arr)
+    return answer
+
+# 아래는 테스트케이스 출력을 해보기 위한 코드입니다.
+scores = [[85, 92, 95, 90], [91, 76, 85, 50]]
+ret = solution(scores)
+
+# [실행] 버튼을 누르면 출력 값을 볼 수 있습니다.
+print("solution 함수의 반환 값은", ret, "입니다.")
